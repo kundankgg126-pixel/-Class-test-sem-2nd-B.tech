@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Basics — 50 MCQ Quiz</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#eef2f7;color:#222;padding:20px}
+
+h1{text-align:center;background:#1a3a6b;color:#fff;padding:20px;border-radius:12px;font-size:1.3rem;margin-bottom:20px}
+
+.quiz-wrap{max-width:780px;margin:0 auto}
+
+.section-label{font-weight:bold;color:#1a3a6b;font-size:.85rem;text-transform:uppercase;letter-spacing:1px;border-left:4px solid #e94560;padding-left:10px;margin:20px 0 8px}
+
+.question{background:#fff;border:1.5px solid #dce3f0;border-radius:10px;padding:16px 20px;margin-bottom:12px}
+.q-text{font-weight:bold;font-size:.93rem;color:#1a3a6b;margin-bottom:12px}
+.options{display:flex;flex-direction:column;gap:8px}
+
+.option{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:8px;border:1.5px solid #dce3f0;font-size:.91rem;background:#f8faff;cursor:pointer;transition:border-color .15s}
+input[type=radio]{accent-color:#1a3a6b;width:15px;height:15px;flex-shrink:0}
+
+/* ── Instant answer highlight ── */
+.option:has(input[type=radio][data-c=y]:checked){background:#c8f7c5;border-color:#4caf50;font-weight:bold}
+.option:has(input[type=radio][data-c=n]:checked){background:#f7c5c5;border-color:#e53935}
+/* Show correct when wrong picked */
+.question:has(input[type=radio][data-c=n]:checked) .option:has(input[type=radio][data-c=y]){background:#c8f7c5;border-color:#4caf50;font-weight:bold}
+
+/* option label prefix */
+.opt-prefix{font-weight:bold;color:#1a3a6b;min-width:22px}
+
+/* Submit button */
+.submit-btn{display:block;text-align:center;text-decoration:none;padding:14px 44px;font-size:1.05rem;border-radius:8px;font-weight:bold;background:#1a3a6b;color:#fff;max-width:240px;margin:24px auto}
+.submit-btn:hover{background:#e94560}
+
+/* ════════════ RESULT PANEL ════════════ */
+#result{display:none;max-width:780px;margin:0 auto 30px}
+#result:target{display:block}
+
+/* counter setup */
+#result:target{counter-reset:myscore}
+body:has(#q1a:checked) #result:target{counter-increment:myscore}
+body:has(#q1a:checked) .seg1{background:#4caf50}
+body:has(#q1b:checked) .seg1{background:#f44336}
+body:has(#q2b:checked) #result:target{counter-increment:myscore}
+body:has(#q2b:checked) .seg2{background:#4caf50}
+body:has(#q2a:checked) .seg2{background:#f44336}
+body:has(#q3a:checked) #result:target{counter-increment:myscore}
+body:has(#q3a:checked) .seg3{background:#4caf50}
+body:has(#q3b:checked) .seg3{background:#f44336}
+body:has(#q4b:checked) #result:target{counter-increment:myscore}
+body:has(#q4b:checked) .seg4{background:#4caf50}
+body:has(#q4a:checked) .seg4{background:#f44336}
+body:has(#q5a:checked) #result:target{counter-increment:myscore}
+body:has(#q5a:checked) .seg5{background:#4caf50}
+body:has(#q5b:checked) .seg5{background:#f44336}
+body:has(#q6b:checked) #result:target{counter-increment:myscore}
+body:has(#q6b:checked) .seg6{background:#4caf50}
+body:has(#q6a:checked) .seg6{background:#f44336}
+body:has(#q7a:checked) #result:target{counter-increment:myscore}
+body:has(#q7a:checked) .seg7{background:#4caf50}
+body:has(#q7b:checked) .seg7{background:#f44336}
+body:has(#q8b:checked) #result:target{counter-increment:myscore}
+body:has(#q8b:checked) .seg8{background:#4caf50}
+body:has(#q8a:checked) .seg8{background:#f44336}
+body:has(#q9a:checked) #result:target{counter-increment:myscore}
+body:has(#q9a:checked) .seg9{background:#4caf50}
+body:has(#q9b:checked) .seg9{background:#f44336}
+body:has(#q10b:checked) #result:target{counter-increment:myscore}
+body:has(#q10b:checked) .seg10{background:#4caf50}
+body:has(#q10a:checked) .seg10{background:#f44336}
+body:has(#q11a:checked) #result:target{counter-increment:myscore}
+body:has(#q11a:checked) .seg11{background:#4caf50}
+body:has(#q11b:checked) .seg11{background:#f44336}
+body:has(#q12b:checked) #result:target{counter-increment:myscore}
+body:has(#q12b:checked) .seg12{background:#4caf50}
+body:has(#q12a:checked) .seg12{background:#f44336}
+body:has(#q13a:checked) #result:target{counter-increment:myscore}
+body:has(#q13a:checked) .seg13{background:#4caf50}
+body:has(#q13b:checked) .seg13{background:#f44336}
+body:has(#q14b:checked) #result:target{counter-increment:myscore}
+body:has(#q14b:checked) .seg14{background:#4caf50}
+body:has(#q14a:checked) .seg14{background:#f44336}
+body:has(#q15a:checked) #result:target{counter-increment:myscore}
+body:has(#q15a:checked) .seg15{background:#4caf50}
+body:has(#q15b:checked) .seg15{background:#f44336}
+body:has(#q16b:checked) #result:target{counter-increment:myscore}
+body:has(#q16b:checked) .seg16{background:#4caf50}
+body:has(#q16a:checked) .seg16{background:#f44336}
+body:has(#q17a:checked) #result:target{counter-increment:myscore}
+body:has(#q17a:checked) .seg17{background:#4caf50}
+body:has(#q17b:checked) .seg17{background:#f44336}
+body:has(#q18b:checked) #result:target{counter-increment:myscore}
+body:has(#q18b:checked) .seg18{background:#4caf50}
+body:has(#q18a:checked) .seg18{background:#f44336}
+body:has(#q19a:checked) #result:target{counter-increment:myscore}
+body:has(#q19a:checked) .seg19{background:#4caf50}
+body:has(#q19b:checked) .seg19{background:#f44336}
+body:has(#q20b:checked) #result:target{counter-increment:myscore}
+body:has(#q20b:checked) .seg20{background:#4caf50}
+body:has(#q20a:checked) .seg20{background:#f44336}
+body:has(#q21a:checked) #result:target{counter-increment:myscore}
+body:has(#q21a:checked) .seg21{background:#4caf50}
+body:has(#q21b:checked) .seg21{background:#f44336}
+body:has(#q22b:checked) #result:target{counter-increment:myscore}
+body:has(#q22b:checked) .seg22{background:#4caf50}
+body:has(#q22a:checked) .seg22{background:#f44336}
+body:has(#q23a:checked) #result:target{counter-increment:myscore}
+body:has(#q23a:checked) .seg23{background:#4caf50}
+body:has(#q23b:checked) .seg23{background:#f44336}
+body:has(#q24b:checked) #result:target{counter-increment:myscore}
+body:has(#q24b:checked) .seg24{background:#4caf50}
+body:has(#q24a:checked) .seg24{background:#f44336}
+body:has(#q25a:checked) #result:target{counter-increment:myscore}
+body:has(#q25a:checked) .seg25{background:#4caf50}
+body:has(#q25b:checked) .seg25{background:#f44336}
+body:has(#q26b:checked) #result:target{counter-increment:myscore}
+body:has(#q26b:checked) .seg26{background:#4caf50}
+body:has(#q26a:checked) .seg26{background:#f44336}
+body:has(#q27a:checked) #result:target{counter-increment:myscore}
+body:has(#q27a:checked) .seg27{background:#4caf50}
+body:has(#q27b:checked) .seg27{background:#f44336}
+body:has(#q28b:checked) #result:target{counter-increment:myscore}
+body:has(#q28b:checked) .seg28{background:#4caf50}
+body:has(#q28a:checked) .seg28{background:#f44336}
+body:has(#q29a:checked) #result:target{counter-increment:myscore}
+body:has(#q29a:checked) .seg29{background:#4caf50}
+body:has(#q29b:checked) .seg29{background:#f44336}
+body:has(#q30b:checked) #result:target{counter-increment:myscore}
+body:has(#q30b:checked) .seg30{background:#4caf50}
+body:has(#q30a:checked) .seg30{background:#f44336}
+body:has(#q31a:checked) #result:target{counter-increment:myscore}
+body:has(#q31a:checked) .seg31{background:#4caf50}
+body:has(#q31b:checked) .seg31{background:#f44336}
+body:has(#q32b:checked) #result:target{counter-increment:myscore}
+body:has(#q32b:checked) .seg32{background:#4caf50}
+body:has(#q32a:checked) .seg32{background:#f44336}
+body:has(#q33a:checked) #result:target{counter-increment:myscore}
+body:has(#q33a:checked) .seg33{background:#4caf50}
+body:has(#q33b:checked) .seg33{background:#f44336}
+body:has(#q34b:checked) #result:target{counter-increment:myscore}
+body:has(#q34b:checked) .seg34{background:#4caf50}
+body:has(#q34a:checked) .seg34{background:#f44336}
+body:has(#q35a:checked) #result:target{counter-increment:myscore}
+body:has(#q35a:checked) .seg35{background:#4caf50}
+body:has(#q35b:checked) .seg35{background:#f44336}
+body:has(#q36b:checked) #result:target{counter-increment:myscore}
+body:has(#q36b:checked) .seg36{background:#4caf50}
+body:has(#q36a:checked) .seg36{background:#f44336}
+body:has(#q37a:checked) #result:target{counter-increment:myscore}
+body:has(#q37a:checked) .seg37{background:#4caf50}
+body:has(#q37b:checked) .seg37{background:#f44336}
+body:has(#q38b:checked) #result:target{counter-increment:myscore}
+body:has(#q38b:checked) .seg38{background:#4caf50}
+body:has(#q38a:checked) .seg38{background:#f44336}
+body:has(#q39a:checked) #result:target{counter-increment:myscore}
+body:has(#q39a:checked) .seg39{background:#4caf50}
+body:has(#q39b:checked) .seg39{background:#f44336}
+body:has(#q40b:checked) #result:target{counter-increment:myscore}
+body:has(#q40b:checked) .seg40{background:#4caf50}
+body:has(#q40a:checked) .seg40{background:#f44336}
+body:has(#q41a:checked) #result:target{counter-increment:myscore}
+body:has(#q41a:checked) .seg41{background:#4caf50}
+body:has(#q41b:checked) .seg41{background:#f44336}
+body:has(#q42b:checked) #result:target{counter-increment:myscore}
+body:has(#q42b:checked) .seg42{background:#4caf50}
+body:has(#q42a:checked) .seg42{background:#f44336}
+body:has(#q43a:checked) #result:target{counter-increment:myscore}
+body:has(#q43a:checked) .seg43{background:#4caf50}
+body:has(#q43b:checked) .seg43{background:#f44336}
+body:has(#q44b:checked) #result:target{counter-increment:myscore}
+body:has(#q44b:checked) .seg44{background:#4caf50}
+body:has(#q44a:checked) .seg44{background:#f44336}
+body:has(#q45a:checked) #result:target{counter-increment:myscore}
+body:has(#q45a:checked) .seg45{background:#4caf50}
+body:has(#q45b:checked) .seg45{background:#f44336}
+body:has(#q46b:checked) #result:target{counter-increment:myscore}
+body:has(#q46b:checked) .seg46{background:#4caf50}
+body:has(#q46a:checked) .seg46{background:#f44336}
+body:has(#q47a:checked) #result:target{counter-increment:myscore}
+body:has(#q47a:checked) .seg47{background:#4caf50}
+body:has(#q47b:checked) .seg47{background:#f44336}
+body:has(#q48b:checked) #result:target{counter-increment:myscore}
+body:has(#q48b:checked) .seg48{background:#4caf50}
+body:has(#q48a:checked) .seg48{background:#f44336}
+body:has(#q49a:checked) #result:target{counter-increment:myscore}
+body:has(#q49a:checked) .seg49{background:#4caf50}
+body:has(#q49b:checked) .seg49{background:#f44336}
+body:has(#q50b:checked) #result:target{counter-increment:myscore}
+body:has(#q50b:checked) .seg50{background:#4caf50}
+body:has(#q50a:checked) .seg50{background:#f44336}
+
+
+.result-card{border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+
+/* Header */
+.r-head{background:#1a3a6b;color:#fff;padding:26px 28px;text-align:center}
+.r-head h2{font-size:1.5rem;margin-bottom:6px}
+.r-head p{font-size:.88rem;color:#a0c4ff;margin-bottom:14px}
+.r-score{font-size:3rem;font-weight:bold;line-height:1;color:#fff}
+.r-score::before{content:counter(myscore)}
+.r-denom{font-size:1rem;color:#a0c4ff;margin-top:2px}
+.r-pct{font-size:1.15rem;font-weight:bold;color:#c8f7c5;margin-top:6px}
+.r-pct::before{content:"Percentage: " counter(myscore) " × 2%"}
+
+/* Body */
+.r-body{background:#fff;padding:22px 26px}
+.bar-label{font-size:.82rem;color:#888;margin-bottom:6px}
+.pct-bar{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px}
+.pct-seg{flex:1;min-width:9px;height:20px;background:#e0e7ff;border-radius:3px}
+.bar-hint{font-size:.82rem;color:#888;margin-bottom:16px}
+
+/* Pass/Fail banners */
+.pass-banner,.fail-banner{padding:13px 20px;border-radius:10px;font-size:1.05rem;font-weight:bold;text-align:center;margin-top:8px}
+.pass-banner{background:#e8f5e9;color:#1b5e20;border:2px solid #4caf50;display:none}
+.fail-banner{background:#ffebee;color:#b71c1c;border:2px solid #e53935;display:block}
+body:has(#q1a:checked):has(#q2b:checked):has(#q3a:checked):has(#q4b:checked):has(#q5a:checked):has(#q6b:checked):has(#q7a:checked):has(#q8b:checked):has(#q9a:checked):has(#q10b:checked):has(#q11a:checked):has(#q12b:checked):has(#q13a:checked):has(#q14b:checked):has(#q15a:checked):has(#q16b:checked):has(#q17a:checked):has(#q18b:checked):has(#q19a:checked):has(#q20b:checked):has(#q21a:checked):has(#q22b:checked):has(#q23a:checked):has(#q24b:checked):has(#q25a:checked):has(#q26b:checked):has(#q27a:checked):has(#q28b:checked):has(#q29a:checked):has(#q30b:checked):has(#q31a:checked):has(#q32b:checked):has(#q33a:checked):has(#q34b:checked):has(#q35a:checked):has(#q36b:checked):has(#q37a:checked):has(#q38b:checked):has(#q39a:checked):has(#q40b:checked) #result:target .pass-banner{display:block}
+body:has(#q1a:checked):has(#q2b:checked):has(#q3a:checked):has(#q4b:checked):has(#q5a:checked):has(#q6b:checked):has(#q7a:checked):has(#q8b:checked):has(#q9a:checked):has(#q10b:checked):has(#q11a:checked):has(#q12b:checked):has(#q13a:checked):has(#q14b:checked):has(#q15a:checked):has(#q16b:checked):has(#q17a:checked):has(#q18b:checked):has(#q19a:checked):has(#q20b:checked):has(#q21a:checked):has(#q22b:checked):has(#q23a:checked):has(#q24b:checked):has(#q25a:checked):has(#q26b:checked):has(#q27a:checked):has(#q28b:checked):has(#q29a:checked):has(#q30b:checked):has(#q31a:checked):has(#q32b:checked):has(#q33a:checked):has(#q34b:checked):has(#q35a:checked):has(#q36b:checked):has(#q37a:checked):has(#q38b:checked):has(#q39a:checked):has(#q40b:checked) #result:target .fail-banner{display:none}
+
+.r-foot{background:#f1f5f9;padding:16px 26px;text-align:center;border-top:1px solid #e2e8f0}
+.back-btn{display:inline-block;background:#1a3a6b;color:#fff;padding:10px 30px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:.93rem}
+.back-btn:hover{background:#e94560}
+
+@media(max-width:500px){
+  h1{font-size:1.1rem}
+  .option{font-size:.87rem}
+  .r-score{font-size:2.4rem}
+}
+</style>
+</head>
+<body>
+
+<h1>🌐 Web Basics &amp; Overview — 50 MCQ Quiz</h1>
+<a id="top"></a>
+
+<!-- RESULT PANEL -->
+<div id="result">
+  <div class="result-card">
+    <div class="r-head">
+      <h2>📊 Quiz Result</h2>
+      <p>Wapas scroll karke apne answers review karo</p>
+      <div class="r-score"></div>
+      <div class="r-denom">out of 50 correct</div>
+      <div class="r-pct"></div>
+    </div>
+    <div class="r-body">
+      <div class="bar-label">Answer breakdown (🟢 sahi | 🔴 galat | ⬜ answer nahi diya)</div>
+      <div class="pct-bar">
+        <div class="pct-seg seg1" title="Q1"></div>
+        <div class="pct-seg seg2" title="Q2"></div>
+        <div class="pct-seg seg3" title="Q3"></div>
+        <div class="pct-seg seg4" title="Q4"></div>
+        <div class="pct-seg seg5" title="Q5"></div>
+        <div class="pct-seg seg6" title="Q6"></div>
+        <div class="pct-seg seg7" title="Q7"></div>
+        <div class="pct-seg seg8" title="Q8"></div>
+        <div class="pct-seg seg9" title="Q9"></div>
+        <div class="pct-seg seg10" title="Q10"></div>
+        <div class="pct-seg seg11" title="Q11"></div>
+        <div class="pct-seg seg12" title="Q12"></div>
+        <div class="pct-seg seg13" title="Q13"></div>
+        <div class="pct-seg seg14" title="Q14"></div>
+        <div class="pct-seg seg15" title="Q15"></div>
+        <div class="pct-seg seg16" title="Q16"></div>
+        <div class="pct-seg seg17" title="Q17"></div>
+        <div class="pct-seg seg18" title="Q18"></div>
+        <div class="pct-seg seg19" title="Q19"></div>
+        <div class="pct-seg seg20" title="Q20"></div>
+        <div class="pct-seg seg21" title="Q21"></div>
+        <div class="pct-seg seg22" title="Q22"></div>
+        <div class="pct-seg seg23" title="Q23"></div>
+        <div class="pct-seg seg24" title="Q24"></div>
+        <div class="pct-seg seg25" title="Q25"></div>
+        <div class="pct-seg seg26" title="Q26"></div>
+        <div class="pct-seg seg27" title="Q27"></div>
+        <div class="pct-seg seg28" title="Q28"></div>
+        <div class="pct-seg seg29" title="Q29"></div>
+        <div class="pct-seg seg30" title="Q30"></div>
+        <div class="pct-seg seg31" title="Q31"></div>
+        <div class="pct-seg seg32" title="Q32"></div>
+        <div class="pct-seg seg33" title="Q33"></div>
+        <div class="pct-seg seg34" title="Q34"></div>
+        <div class="pct-seg seg35" title="Q35"></div>
+        <div class="pct-seg seg36" title="Q36"></div>
+        <div class="pct-seg seg37" title="Q37"></div>
+        <div class="pct-seg seg38" title="Q38"></div>
+        <div class="pct-seg seg39" title="Q39"></div>
+        <div class="pct-seg seg40" title="Q40"></div>
+        <div class="pct-seg seg41" title="Q41"></div>
+        <div class="pct-seg seg42" title="Q42"></div>
+        <div class="pct-seg seg43" title="Q43"></div>
+        <div class="pct-seg seg44" title="Q44"></div>
+        <div class="pct-seg seg45" title="Q45"></div>
+        <div class="pct-seg seg46" title="Q46"></div>
+        <div class="pct-seg seg47" title="Q47"></div>
+        <div class="pct-seg seg48" title="Q48"></div>
+        <div class="pct-seg seg49" title="Q49"></div>
+        <div class="pct-seg seg50" title="Q50"></div>
+      </div>
+      <div class="bar-hint">💡 Har sahi jawab = 2% | Pass ke liye 40/50 (80%) chahiye</div>
+      <div class="pass-banner">🎉 PASS — Shabaash! Aapne 80% ya zyada score kiya!</div>
+      <div class="fail-banner">📚 FAIL — Mehnat karo! 40 sahi jawab chahiye pass ke liye.</div>
+    </div>
+    <div class="r-foot">
+      <a href="#top" class="back-btn">↑ Wapas Jao &amp; Review Karo</a>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ QUESTIONS -->
+<div class="quiz-wrap">
+<div class="section-label">Internet &amp; WWW</div>
+<div class="question">
+  <div class="q-text">1. Internet kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q1" id="q1a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Network of computers
+    </label>
+    <label class="option">
+      <input type="radio" name="q1" id="q1b" data-c="n">
+      <span class="opt-prefix">B.</span> Software
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">2. WWW ka full form kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q2" id="q2a" data-c="n" required>
+      <span class="opt-prefix">A.</span> World Web Wide
+    </label>
+    <label class="option">
+      <input type="radio" name="q2" id="q2b" data-c="y">
+      <span class="opt-prefix">B.</span> World Wide Web
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">3. WWW kis ka part hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q3" id="q3a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Internet
+    </label>
+    <label class="option">
+      <input type="radio" name="q3" id="q3b" data-c="n">
+      <span class="opt-prefix">B.</span> Browser
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">4. Web ka avishkar kisne kiya?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q4" id="q4a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Bill Gates
+    </label>
+    <label class="option">
+      <input type="radio" name="q4" id="q4b" data-c="y">
+      <span class="opt-prefix">B.</span> Tim Berners-Lee
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">5. Web kab invent hua?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q5" id="q5a" data-c="y" required>
+      <span class="opt-prefix">A.</span> 1989
+    </label>
+    <label class="option">
+      <input type="radio" name="q5" id="q5b" data-c="n">
+      <span class="opt-prefix">B.</span> 1999
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">6. First website kab bani?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q6" id="q6a" data-c="n" required>
+      <span class="opt-prefix">A.</span> 2001
+    </label>
+    <label class="option">
+      <input type="radio" name="q6" id="q6b" data-c="y">
+      <span class="opt-prefix">B.</span> 1991
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">7. Website kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q7" id="q7a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Collection of web pages
+    </label>
+    <label class="option">
+      <input type="radio" name="q7" id="q7b" data-c="n">
+      <span class="opt-prefix">B.</span> Collection of computers
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">8. Homepage kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q8" id="q8a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Last page of website
+    </label>
+    <label class="option">
+      <input type="radio" name="q8" id="q8b" data-c="y">
+      <span class="opt-prefix">B.</span> First page of website
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">9. Domain Name kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q9" id="q9a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Website address
+    </label>
+    <label class="option">
+      <input type="radio" name="q9" id="q9b" data-c="n">
+      <span class="opt-prefix">B.</span> Browser name
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">10. google.com kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q10" id="q10a" data-c="n" required>
+      <span class="opt-prefix">A.</span> IP Address
+    </label>
+    <label class="option">
+      <input type="radio" name="q10" id="q10b" data-c="y">
+      <span class="opt-prefix">B.</span> Domain Name
+    </label>
+  </div>
+</div>
+<div class="section-label">DNS, Browser &amp; Server</div>
+<div class="question">
+  <div class="q-text">11. DNS ka full form kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q11" id="q11a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Domain Name System
+    </label>
+    <label class="option">
+      <input type="radio" name="q11" id="q11b" data-c="n">
+      <span class="opt-prefix">B.</span> Data Network Service
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">12. Web Browser kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q12" id="q12a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Hardware device
+    </label>
+    <label class="option">
+      <input type="radio" name="q12" id="q12b" data-c="y">
+      <span class="opt-prefix">B.</span> Software to open websites
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">13. Kaun sa browser hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q13" id="q13a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Google Chrome
+    </label>
+    <label class="option">
+      <input type="radio" name="q13" id="q13b" data-c="n">
+      <span class="opt-prefix">B.</span> Apache
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">14. Web Server kya karta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q14" id="q14a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Creates browser
+    </label>
+    <label class="option">
+      <input type="radio" name="q14" id="q14b" data-c="y">
+      <span class="opt-prefix">B.</span> Stores websites
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">15. Kaun sa web server hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q15" id="q15a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Apache
+    </label>
+    <label class="option">
+      <input type="radio" name="q15" id="q15b" data-c="n">
+      <span class="opt-prefix">B.</span> Chrome
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">16. Client kya karta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q16" id="q16a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Stores website
+    </label>
+    <label class="option">
+      <input type="radio" name="q16" id="q16b" data-c="y">
+      <span class="opt-prefix">B.</span> Sends request
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">17. Server kya karta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q17" id="q17a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Sends response
+    </label>
+    <label class="option">
+      <input type="radio" name="q17" id="q17b" data-c="n">
+      <span class="opt-prefix">B.</span> Types URL
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">18. Client-Server model me pehle kya hota hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q18" id="q18a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Response
+    </label>
+    <label class="option">
+      <input type="radio" name="q18" id="q18b" data-c="y">
+      <span class="opt-prefix">B.</span> Request
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">19. 3-Tier Architecture me kitni layers hoti hain?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q19" id="q19a" data-c="y" required>
+      <span class="opt-prefix">A.</span> 3
+    </label>
+    <label class="option">
+      <input type="radio" name="q19" id="q19b" data-c="n">
+      <span class="opt-prefix">B.</span> 4
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">20. Presentation Layer kis se interact karti hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q20" id="q20a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Database
+    </label>
+    <label class="option">
+      <input type="radio" name="q20" id="q20b" data-c="y">
+      <span class="opt-prefix">B.</span> User
+    </label>
+  </div>
+</div>
+<div class="section-label">Architecture, Hosting &amp; HTTP</div>
+<div class="question">
+  <div class="q-text">21. Data Layer kya karti hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q21" id="q21a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Stores data
+    </label>
+    <label class="option">
+      <input type="radio" name="q21" id="q21b" data-c="n">
+      <span class="opt-prefix">B.</span> Shows webpage
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">22. Application Layer kya karti hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q22" id="q22a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Stores data
+    </label>
+    <label class="option">
+      <input type="radio" name="q22" id="q22b" data-c="y">
+      <span class="opt-prefix">B.</span> Processes data
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">23. Web Hosting kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q23" id="q23a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Website storage service
+    </label>
+    <label class="option">
+      <input type="radio" name="q23" id="q23b" data-c="n">
+      <span class="opt-prefix">B.</span> Browser software
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">24. Hosting ke bina website?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q24" id="q24a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Fast hogi
+    </label>
+    <label class="option">
+      <input type="radio" name="q24" id="q24b" data-c="y">
+      <span class="opt-prefix">B.</span> Online nahi hogi
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">25. URL ka full form kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q25" id="q25a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Uniform Resource Locator
+    </label>
+    <label class="option">
+      <input type="radio" name="q25" id="q25b" data-c="n">
+      <span class="opt-prefix">B.</span> Universal Resource Link
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">26. URL kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q26" id="q26a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Browser
+    </label>
+    <label class="option">
+      <input type="radio" name="q26" id="q26b" data-c="y">
+      <span class="opt-prefix">B.</span> Web address
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">27. HTTP ka full form kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q27" id="q27a" data-c="y" required>
+      <span class="opt-prefix">A.</span> HyperText Transfer Protocol
+    </label>
+    <label class="option">
+      <input type="radio" name="q27" id="q27b" data-c="n">
+      <span class="opt-prefix">B.</span> Hyper Transfer Text Program
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">28. HTTP kis liye use hota hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q28" id="q28a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Creating database
+    </label>
+    <label class="option">
+      <input type="radio" name="q28" id="q28b" data-c="y">
+      <span class="opt-prefix">B.</span> Communication between browser and server
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">29. HTTPS kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q29" id="q29a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Secure HTTP
+    </label>
+    <label class="option">
+      <input type="radio" name="q29" id="q29b" data-c="n">
+      <span class="opt-prefix">B.</span> Fast HTTP
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">30. HTTP ka secure version kaun sa hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q30" id="q30a" data-c="n" required>
+      <span class="opt-prefix">A.</span> FTP
+    </label>
+    <label class="option">
+      <input type="radio" name="q30" id="q30b" data-c="y">
+      <span class="opt-prefix">B.</span> HTTPS
+    </label>
+  </div>
+</div>
+<div class="section-label">MIME &amp; Web Technologies</div>
+<div class="question">
+  <div class="q-text">31. MIME ka full form kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q31" id="q31a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Multipurpose Internet Mail Extensions
+    </label>
+    <label class="option">
+      <input type="radio" name="q31" id="q31b" data-c="n">
+      <span class="opt-prefix">B.</span> Multiple Internet Mail Exchange
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">32. MIME kis liye use hota hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q32" id="q32a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Website hosting ke liye
+    </label>
+    <label class="option">
+      <input type="radio" name="q32" id="q32b" data-c="y">
+      <span class="opt-prefix">B.</span> Data type define karne ke liye
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">33. text/html MIME type kis ke liye hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q33" id="q33a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Web page
+    </label>
+    <label class="option">
+      <input type="radio" name="q33" id="q33b" data-c="n">
+      <span class="opt-prefix">B.</span> Image
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">34. image/jpeg MIME type kis ke liye hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q34" id="q34a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Video
+    </label>
+    <label class="option">
+      <input type="radio" name="q34" id="q34b" data-c="y">
+      <span class="opt-prefix">B.</span> Image
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">35. HTML ka use kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q35" id="q35a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Structure of webpage
+    </label>
+    <label class="option">
+      <input type="radio" name="q35" id="q35b" data-c="n">
+      <span class="opt-prefix">B.</span> Styling
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">36. CSS ka use kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q36" id="q36a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Database
+    </label>
+    <label class="option">
+      <input type="radio" name="q36" id="q36b" data-c="y">
+      <span class="opt-prefix">B.</span> Styling webpage
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">37. JavaScript ka use kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q37" id="q37a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Interactivity
+    </label>
+    <label class="option">
+      <input type="radio" name="q37" id="q37b" data-c="n">
+      <span class="opt-prefix">B.</span> Hosting
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">38. VS Code kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q38" id="q38a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Browser
+    </label>
+    <label class="option">
+      <input type="radio" name="q38" id="q38b" data-c="y">
+      <span class="opt-prefix">B.</span> Code Editor
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">39. Git kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q39" id="q39a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Version Control Tool
+    </label>
+    <label class="option">
+      <input type="radio" name="q39" id="q39b" data-c="n">
+      <span class="opt-prefix">B.</span> Database
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">40. MySQL kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q40" id="q40a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Browser
+    </label>
+    <label class="option">
+      <input type="radio" name="q40" id="q40b" data-c="y">
+      <span class="opt-prefix">B.</span> Database
+    </label>
+  </div>
+</div>
+<div class="section-label">Website Types &amp; Web Versions</div>
+<div class="question">
+  <div class="q-text">41. Browser kya karta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q41" id="q41a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Displays webpage
+    </label>
+    <label class="option">
+      <input type="radio" name="q41" id="q41b" data-c="n">
+      <span class="opt-prefix">B.</span> Stores webpage
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">42. Server kya store karta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q42" id="q42a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Browser
+    </label>
+    <label class="option">
+      <input type="radio" name="q42" id="q42b" data-c="y">
+      <span class="opt-prefix">B.</span> Website files
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">43. Static Website me content?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q43" id="q43a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Fixed
+    </label>
+    <label class="option">
+      <input type="radio" name="q43" id="q43b" data-c="n">
+      <span class="opt-prefix">B.</span> Changes automatically
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">44. Dynamic Website me content?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q44" id="q44a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Fixed
+    </label>
+    <label class="option">
+      <input type="radio" name="q44" id="q44b" data-c="y">
+      <span class="opt-prefix">B.</span> Changes dynamically
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">45. Web 1.0 kya tha?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q45" id="q45a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Read Only Web
+    </label>
+    <label class="option">
+      <input type="radio" name="q45" id="q45b" data-c="n">
+      <span class="opt-prefix">B.</span> Read and Write Web
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">46. Web 2.0 kya tha?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q46" id="q46a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Read Only Web
+    </label>
+    <label class="option">
+      <input type="radio" name="q46" id="q46b" data-c="y">
+      <span class="opt-prefix">B.</span> Read and Write Web
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">47. Web 3.0 kya hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q47" id="q47a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Smart Web
+    </label>
+    <label class="option">
+      <input type="radio" name="q47" id="q47b" data-c="n">
+      <span class="opt-prefix">B.</span> Static Web
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">48. HTTP Request kaun bhejta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q48" id="q48a" data-c="n" required>
+      <span class="opt-prefix">A.</span> Server
+    </label>
+    <label class="option">
+      <input type="radio" name="q48" id="q48b" data-c="y">
+      <span class="opt-prefix">B.</span> Browser
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">49. HTTP Response kaun bhejta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q49" id="q49a" data-c="y" required>
+      <span class="opt-prefix">A.</span> Server
+    </label>
+    <label class="option">
+      <input type="radio" name="q49" id="q49b" data-c="n">
+      <span class="opt-prefix">B.</span> Client
+    </label>
+  </div>
+</div>
+<div class="question">
+  <div class="q-text">50. Internet kis protocol par kaam karta hai?</div>
+  <div class="options">
+    <label class="option">
+      <input type="radio" name="q50" id="q50a" data-c="n" required>
+      <span class="opt-prefix">A.</span> HTML
+    </label>
+    <label class="option">
+      <input type="radio" name="q50" id="q50b" data-c="y">
+      <span class="opt-prefix">B.</span> TCP/IP
+    </label>
+  </div>
+</div>
+  <a href="#result" class="submit-btn">Submit Test ✅</a>
+</div>
+
+</body>
+</html>
